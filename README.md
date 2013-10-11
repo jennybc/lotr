@@ -2,11 +2,11 @@ Data downloaded from:
 
 <http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/words-spoken-by-character-race-scene/versions/1.txt>
 
-Original space-and-punctuation-containing filename:
+Original file, sporting DOS/Windows line-ending characters and a filename containing both spaces and punctuation:
 
 "Words Spoken, By Character, Race, & Scene, in the Extended Editi.txt"
 
-JB renamed:
+JB tidied and renamed:
 
 lotr_wordsSpoken.tsv
 

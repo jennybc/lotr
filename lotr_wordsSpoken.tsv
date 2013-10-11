@@ -387,9 +387,9 @@ The Two Towers	45: The Glittering Caves	Legolas	Elf	36
 The Two Towers	45: The Glittering Caves	Rohan Warrior	Men	12
 The Two Towers	46: Where Is The Horse And The Rider	Gamling	Men	30
 The Two Towers	46: Where Is The Horse And The Rider	Theoden	Men	64
-The Two Towers	47: "Don't Be Hasty, Master Meriadoc!"	Merry	Hobbit	18
-The Two Towers	47: "Don't Be Hasty, Master Meriadoc!"	Pippin	Hobbit	7
-The Two Towers	47: "Don't Be Hasty, Master Meriadoc!"	Treebeard	Ent	12
+The Two Towers	47: Don't Be Hasty, Master Meriadoc!	Merry	Hobbit	18
+The Two Towers	47: Don't Be Hasty, Master Meriadoc!	Pippin	Hobbit	7
+The Two Towers	47: Don't Be Hasty, Master Meriadoc!	Treebeard	Ent	12
 The Two Towers	48: The Host Of The Eldar	Aragorn	Men	34
 The Two Towers	48: The Host Of The Eldar	Gimli	Dwarf	14
 The Two Towers	48: The Host Of The Eldar	Haldir	Elf	37
@@ -455,9 +455,9 @@ The Two Towers	64: Farewell To Faramir	Faramir	Men	95
 The Two Towers	64: Farewell To Faramir	Frodo	Hobbit	18
 The Two Towers	64: Farewell To Faramir	Gollum	Gollum	32
 The Two Towers	64: Farewell To Faramir	Sam	Hobbit	54
-The Two Towers	65: "The Battle For Middle Earth Is About To Begin"	Frodo	Hobbit	30
-The Two Towers	65: "The Battle For Middle Earth Is About To Begin"	Gandalf	Ainur	36
-The Two Towers	65: "The Battle For Middle Earth Is About To Begin"	Sam	Hobbit	69
+The Two Towers	65: The Battle For Middle Earth Is About To Begin	Frodo	Hobbit	30
+The Two Towers	65: The Battle For Middle Earth Is About To Begin	Gandalf	Ainur	36
+The Two Towers	65: The Battle For Middle Earth Is About To Begin	Sam	Hobbit	69
 The Two Towers	66: Gollum's Plan	Frodo	Hobbit	11
 The Two Towers	66: Gollum's Plan	Gollum	Gollum	75
 The Two Towers	66: Gollum's Plan	Sam	Hobbit	12
@@ -513,9 +513,9 @@ The Return Of The King	12: The Decline Of Gondor	Pippin	Hobbit	22
 The Return Of The King	13: Cross-roads Of The Fallen King	Frodo	Hobbit	30
 The Return Of The King	13: Cross-roads Of The Fallen King	Gollum	Gollum	13
 The Return Of The King	13: Cross-roads Of The Fallen King	Sam	Hobbit	56
-The Return Of The King	14: "The Deep Breath Before The Plunge"	Gandalf	Ainur	163
-The Return Of The King	14: "The Deep Breath Before The Plunge"	Gondor Man	Men	2
-The Return Of The King	14: "The Deep Breath Before The Plunge"	Pippin	Hobbit	75
+The Return Of The King	14: The Deep Breath Before The Plunge	Gandalf	Ainur	163
+The Return Of The King	14: The Deep Breath Before The Plunge	Gondor Man	Men	2
+The Return Of The King	14: The Deep Breath Before The Plunge	Pippin	Hobbit	75
 The Return Of The King	15: Minas Morgul	Frodo	Hobbit	8
 The Return Of The King	15: Minas Morgul	Gandalf	Ainur	20
 The Return Of The King	15: Minas Morgul	Gollum	Gollum	50
@@ -552,10 +552,10 @@ The Return Of The King	22: The Wizard's Pupil	Denethor	Men	114
 The Return Of The King	22: The Wizard's Pupil	Faramir	Men	72
 The Return Of The King	23: The Stairs Of Cirith Ungol	Gollum	Gollum	76
 The Return Of The King	23: The Stairs Of Cirith Ungol	Sam	Hobbit	8
-The Return Of The King	24: "Courage Is The Best Defense"	Gandalf	Ainur	9
-The Return Of The King	24: "Courage Is The Best Defense"	Gondor Man	Men	9
-The Return Of The King	24: "Courage Is The Best Defense"	Gothmog	Orc	4
-The Return Of The King	24: "Courage Is The Best Defense"	Witch King	Nazgul	21
+The Return Of The King	24: Courage Is The Best Defense	Gandalf	Ainur	9
+The Return Of The King	24: Courage Is The Best Defense	Gondor Man	Men	9
+The Return Of The King	24: Courage Is The Best Defense	Gothmog	Orc	4
+The Return Of The King	24: Courage Is The Best Defense	Witch King	Nazgul	21
 The Return Of The King	25: Peregrin Of The Tower Guard	Faramir	Men	80
 The Return Of The King	25: Peregrin Of The Tower Guard	Pippin	Hobbit	66
 The Return Of The King	26: Allegiance To Denethor	Denethor	Men	89
@@ -590,8 +590,8 @@ The Return Of The King	31: Aragorn Takes The Paths Of The Dead	Gimli	Dwarf	20
 The Return Of The King	31: Aragorn Takes The Paths Of The Dead	Legolas	Elf	9
 The Return Of The King	31: Aragorn Takes The Paths Of The Dead	Rohan Warrior	Men	20
 The Return Of The King	31: Aragorn Takes The Paths Of The Dead	Theoden	Men	16
-The Return Of The King	32: "No More Despair"	Eowyn	Men	10
-The Return Of The King	32: "No More Despair"	Theoden	Men	60
+The Return Of The King	32: No More Despair	Eowyn	Men	10
+The Return Of The King	32: No More Despair	Theoden	Men	60
 The Return Of The King	33: Dwimoberg ~ The Haunted Mountain	Aragorn	Men	6
 The Return Of The King	33: Dwimoberg ~ The Haunted Mountain	Gimli	Dwarf	45
 The Return Of The King	33: Dwimoberg ~ The Haunted Mountain	Legolas	Elf	123
@@ -649,8 +649,8 @@ The Return Of The King	48: The Battle Of The Pelennor Fields	Eomer	Men	9
 The Return Of The King	48: The Battle Of The Pelennor Fields	Eowyn	Men	8
 The Return Of The King	48: The Battle Of The Pelennor Fields	Rohan Warrior	Men	3
 The Return Of The King	48: The Battle Of The Pelennor Fields	Theoden	Men	26
-The Return Of The King	49: "A Far Green Country"	Gandalf	Ainur	54
-The Return Of The King	49: "A Far Green Country"	Pippin	Hobbit	17
+The Return Of The King	49: A Far Green Country	Gandalf	Ainur	54
+The Return Of The King	49: A Far Green Country	Pippin	Hobbit	17
 The Return Of The King	50: The Nazgul And His Prey	Eowyn	Men	8
 The Return Of The King	50: The Nazgul And His Prey	Theoden	Men	5
 The Return Of The King	50: The Nazgul And His Prey	Witch King	Nazgul	13
@@ -699,8 +699,8 @@ The Return Of The King	65: The Black Gate Opens	Aragorn	Men	103
 The Return Of The King	65: The Black Gate Opens	Gimli	Dwarf	16
 The Return Of The King	65: The Black Gate Opens	Legolas	Elf	8
 The Return Of The King	65: The Black Gate Opens	Sam	Hobbit	16
-The Return Of The King	66: "I Can't Carry It For You… But I Can Carry You"	Frodo	Hobbit	44
-The Return Of The King	66: "I Can't Carry It For You… But I Can Carry You"	Sam	Hobbit	85
+The Return Of The King	66: I Can't Carry It For You… But I Can Carry You	Frodo	Hobbit	44
+The Return Of The King	66: I Can't Carry It For You… But I Can Carry You	Sam	Hobbit	85
 The Return Of The King	67: The Last Move	Aragorn	Men	2
 The Return Of The King	67: The Last Move	Voice Of Sauron	Ainur	2
 The Return Of The King	68: Mount Doom	Frodo	Hobbit	9
