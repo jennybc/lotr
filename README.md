@@ -1,6 +1,6 @@
 Data downloaded from:
 
-<http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/89ade5ae151931b2011542988982112f/versions/1>
+<http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/words-spoken-by-character-race-scene/versions/1.txt>
 
 Original space-and-punctuation-containing filename:
 
