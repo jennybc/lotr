@@ -1,5 +1,7 @@
-library(ggplot2)
-library(plyr)
+
+library(tidyverse)
+library(magrittr)
+library(skimr)
 
 ## quick and dirty exploration so I can build example for STAT 545A
 
@@ -15,61 +17,129 @@ str(lotrDat)
 # $ Race     : Factor w/ 10 levels "Ainur","Dead",..: 7 4 4 6 7 7 7 1 7 7..
 # $ Words    : int  4 5 460 20 214 70 128 197 10 12 ...
 
+head(lotrDat)
+skim(lotrDat)
+
+
 ## reorder Film factor based on story
-oldLevels <- levels(lotrDat$Film)
-jOrder <- sapply(c("Fellowship", "Towers", "Return"),
-                 function(x) grep(x, oldLevels))
-lotrDat <- within(lotrDat,
-                  Film <- factor(as.character(lotrDat$Film),
-                                 oldLevels[jOrder]))
+lotrDat %<>% 
+  mutate(Film = fct_relevel(Film, 
+                            c("The Fellowship Of The Ring", 
+                              "The Two Towers", 
+                              "The Return Of The King")))
+
 
 ## getting rid of some observations
 ## I've always found the Ent parts really boring
 ## Nazgul and the Dead just don't talk enough
 ## Gollum is not a Race!
-lotrDat <-
-  droplevels(subset(lotrDat,
-                    !(Race %in% c("Gollum", "Ent", "Dead", "Nazgul"))))
+lotrDat %<>% 
+  filter(!(Race %in% c("Gollum", "Ent", "Dead", "Nazgul"))) %>% 
+  droplevels()
+  
 
-## no one knows that the Ainur are the wizards
+## The wizards' Race is Istari, a subset of the Ainur 
 ## Men should be Man, for consistency
-lotrDat <-
-  within(lotrDat, Race <- revalue(Race, c(Ainur = "Wizard",
-                                          Men = "Man")))
+lotrDat %<>% 
+  mutate(Race = as.character(Race)) %>% 
+  mutate(Race = ifelse(Character %in% c("Gandalf", 
+                                        "Saruman"), 
+                       "Istar", 
+                       Race) %>% as.factor()) %>% 
+  mutate(Race = fct_recode(Race, 
+                           Man = "Men"))
+
+
 
 p <- ggplot(lotrDat, aes(x = Race, weight = Words))
 p + geom_bar()
 
 ## who speaks alot?
 wordTotals <-
-  ddply(lotrDat, ~ Race, summarize, totalWords = sum(Words))
-arrange(wordTotals, desc(totalWords))
-#     Race totalWords
-# 1 Hobbit       8796
-# 2    Man       8712
-# 3 Wizard       5961
-# 4    Elf       3737
-# 5  Dwarf       1265
-# 6    Orc        723
+  lotrDat %>% 
+  group_by(Race) %>% 
+  summarise(total_words = sum(Words)) %>% 
+  arrange(desc(total_words))
+  
+# Race   total_words
+# <fct>        <int>
+# 1 Hobbit        8796
+# 2 Man           8712
+# 3 Istari        5918
+# 4 Elf           3737
+# 5 Dwarf         1265
+# 6 Orc            723
+# 7 Ainur           43
 
 ## reorder Race based on words spoken
-lotrDat <- within(lotrDat, Race <- reorder(Race, Words, sum))
+lotrDat %<>% 
+  mutate(Race = reorder(Race, 
+                        Words, 
+                        sum))
+
 levels(lotrDat$Race)
 
-p <- ggplot(lotrDat, aes(x = Race, weight = Words))
+p1 <- lotrDat %>% 
+  ggplot(aes(x = Race, 
+             weight = Words)) +
+  geom_bar(aes(fill = Film), 
+             position = position_dodge(width = 0.7)) + 
+  labs(y = "total words spoken") + 
+  theme_light() +
+  theme(panel.grid.minor = element_line(colour = "grey95"), 
+      panel.grid.major = element_line(colour = "grey95")); p1
+    
 
-p + geom_bar()
+p2 <- lotrDat %>% 
+  ggplot(aes(x = Race,
+             y = Words, 
+             color = Film, 
+             fill = Film)) + 
+  scale_color_brewer(type = "seq", 
+                     palette = 7) + 
+  scale_fill_brewer(type = "seq", 
+                    palette = 7) + 
+  scale_y_log10() + 
+  geom_jitter(alpha = 1/2, 
+             position = position_dodge(width=0.5)) + 
+  stat_summary(fun.y = median, 
+               pch = 21, 
+               geom = "point", 
+               size = 6, 
+               col = "grey80") + 
+  labs(y = "words spoken", 
+       subtitle = "Except for Orcs and Hobbits, there's less talking by every \nrace as the films progress \n\nEach data point is number of words spoken by a character \nin a specific chapter", 
+       title = "The Lord of the Rings film trilogy") + 
+  theme_light() +
+  theme(panel.grid.minor = element_line(colour = "grey95"), 
+      panel.grid.major = element_line(colour = "grey95")); p2
+  
 
-p + geom_bar(aes(fill = Film), position = position_dodge(width = 0.7))
 
-p <- ggplot(lotrDat, aes(x = Race, y = Words, color = Film)) +
-  scale_y_log10()
-p + geom_point(alpha = 1/2, position = position_dodge(width=0.5))
 
-p <- ggplot(lotrDat, aes(x = Race, y = Words)) + scale_y_log10() +
-  geom_jitter(alpha = 1/2, position = position_jitter(width = 0.1))
-p + stat_summary(fun.y = median, pch = 21, fill = "orange",
-                 geom = "point", size = 6)
+p3 <- lotrDat %>% 
+  filter(Character %in% c("Frodo", 
+                          "Sam")) %>% 
+  group_by(Character, Film) %>% 
+  summarise(total_words = sum(Words)) %>% 
+  ggplot(aes(x = Character,
+             y = total_words, 
+             color = Film, 
+             fill = Film)) + 
+  scale_color_brewer(type = "seq", 
+                     palette = 7) + 
+  scale_fill_brewer(type = "seq", 
+                    palette = 7) + 
+  geom_col(position = "dodge") + 
+  labs(y = "Words spoken", 
+       subtitle = "Sam really comes into the spotlight as Frodo begins to \nsuccumb to his injuries", 
+       title = "The Lord of the Rings film trilogy") + 
+  theme_light() +
+  theme(panel.grid.minor = element_line(colour = "grey95"), 
+        panel.grid.major = element_line(colour = "grey95")); p3
 
+ggsave("sam-and-frodo.pdf")
+
+  
 write.table(lotrDat, "lotr_clean.tsv", quote = FALSE,
             sep = "\t", row.names = FALSE)
