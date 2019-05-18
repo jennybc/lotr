@@ -1,15 +1,14 @@
 
 library(tidyverse)
-library(magrittr)
-library(skimr)
+
 
 ## quick and dirty exploration so I can build example for STAT 545A
 
 ## those scripts had to be lean, so I did more fiddling here
 
-lotrDat <- read.delim("lotr_wordsSpoken.tsv")
+lotr <- read.delim("lotr_wordsSpoken.tsv")
 
-str(lotrDat)
+str(lotr)
 # 'data.frame':  731 obs. of  5 variables:
 # $ Film     : Factor w/ 3 levels "The Fellowship Of The Ring",..: 1 1 1 ..
 # $ Chapter  : Factor w/ 188 levels "01: Prologue",..: 1 1 1 1 4 8 8 8 8 ..
@@ -17,12 +16,12 @@ str(lotrDat)
 # $ Race     : Factor w/ 10 levels "Ainur","Dead",..: 7 4 4 6 7 7 7 1 7 7..
 # $ Words    : int  4 5 460 20 214 70 128 197 10 12 ...
 
-head(lotrDat)
-skim(lotrDat)
+head(lotr)
+
 
 
 ## reorder Film factor based on story
-lotrDat %<>% 
+lotr <- lotr %>% 
   mutate(Film = fct_relevel(Film, 
                             c("The Fellowship Of The Ring", 
                               "The Two Towers", 
@@ -33,7 +32,7 @@ lotrDat %<>%
 ## I've always found the Ent parts really boring
 ## Nazgul and the Dead just don't talk enough
 ## Gollum is not a Race!
-lotrDat %<>% 
+lotr <- lotr %>% 
   filter(!(Race %in% c("Gollum", "Ent", "Dead", "Nazgul"))) %>% 
   droplevels()
   
@@ -51,12 +50,13 @@ lotrDat %<>%
 
 
 
-p <- ggplot(lotrDat, aes(x = Race, weight = Words))
+
+p <- ggplot(lotr, aes(x = Race, weight = Words))
 p + geom_bar()
 
 ## who speaks alot?
 wordTotals <-
-  lotrDat %>% 
+  lotr %>% 
   group_by(Race) %>% 
   summarise(total_words = sum(Words)) %>% 
   arrange(desc(total_words))
@@ -72,14 +72,14 @@ wordTotals <-
 # 7 Ainur           43
 
 ## reorder Race based on words spoken
-lotrDat %<>% 
+lotr %<>% 
   mutate(Race = reorder(Race, 
                         Words, 
                         sum))
 
-levels(lotrDat$Race)
+levels(lotr$Race)
 
-p1 <- lotrDat %>% 
+p1 <- lotr %>% 
   ggplot(aes(x = Race, 
              weight = Words)) +
   geom_bar(aes(fill = Film), 
@@ -90,7 +90,7 @@ p1 <- lotrDat %>%
       panel.grid.major = element_line(colour = "grey95")); p1
     
 
-p2 <- lotrDat %>% 
+p2 <- lotr %>% 
   ggplot(aes(x = Race,
              y = Words, 
              color = Film, 
@@ -117,7 +117,7 @@ p2 <- lotrDat %>%
 
 
 
-p3 <- lotrDat %>% 
+p3 <- lotr %>% 
   filter(Character %in% c("Frodo", 
                           "Sam")) %>% 
   group_by(Character, Film) %>% 
@@ -132,14 +132,14 @@ p3 <- lotrDat %>%
                     palette = 7) + 
   geom_col(position = "dodge") + 
   labs(y = "Words spoken", 
-       subtitle = "Sam really comes into the spotlight as Frodo begins to \nsuccumb to his injuries", 
+       subtitle = "Sam really comes into the spotlight as Frodo begins to \nsuccumb to his injuries and the weight of carrying the Ring", 
        title = "The Lord of the Rings film trilogy") + 
   theme_light() +
   theme(panel.grid.minor = element_line(colour = "grey95"), 
         panel.grid.major = element_line(colour = "grey95")); p3
 
-ggsave("sam-and-frodo.pdf")
+
 
   
-write.table(lotrDat, "lotr_clean.tsv", quote = FALSE,
+write.table(lotr, "lotr_clean.tsv", quote = FALSE,
             sep = "\t", row.names = FALSE)
