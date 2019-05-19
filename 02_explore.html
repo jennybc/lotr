@@ -128,23 +128,13 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages ---------------------------------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## v ggplot2 3.1.1     v purrr   0.3.2
-## v tibble  2.1.1     v dplyr   0.8.1
-## v tidyr   0.8.3     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.4.0</code></pre>
-<pre><code>## Warning: package 'ggplot2' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'tibble' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'tidyr' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'readr' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'purrr' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'dplyr' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'stringr' was built under R version 3.5.3</code></pre>
-<pre><code>## Warning: package 'forcats' was built under R version 3.5.3</code></pre>
-<pre><code>## -- Conflicts ------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
+<p>Load <code>tidyverse</code> packages:</p>
+<pre class="r"><code>suppressWarnings(
+  suppressMessages((library(tidyverse))))</code></pre>
+<pre><code>##  [1] &quot;forcats&quot;   &quot;stringr&quot;   &quot;dplyr&quot;     &quot;purrr&quot;     &quot;readr&quot;    
+##  [6] &quot;tidyr&quot;     &quot;tibble&quot;    &quot;ggplot2&quot;   &quot;tidyverse&quot; &quot;stats&quot;    
+## [11] &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot;  &quot;methods&quot;  
+## [16] &quot;base&quot;</code></pre>
 <p>This is a quick and dirty exploration so I can build an example for STAT 545A. Those scripts had to be lean, so I did more fiddling here</p>
 <pre class="r"><code>lotr &lt;- read.delim(&quot;lotr_wordsSpoken.tsv&quot;)
 
@@ -185,7 +175,7 @@ str(lotr)</code></pre>
 <div id="modifying-race-for-wizards-and-men" class="section level3">
 <h3>Modifying <code>Race</code> for Wizards and Men:</h3>
 <ul>
-<li>the wizards’ Race is Istari (singular: Istar), a subset of the Ainur</li>
+<li>The wizards’ Race is Istari (singular: Istar), a subset of the Ainur</li>
 <li>Men should be Man, for consistency</li>
 </ul>
 <pre class="r"><code>lotr &lt;- lotr %&gt;% 

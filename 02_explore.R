@@ -5,7 +5,9 @@
 #' date: "May 19th, 2019"
 #' ---
 
-library(tidyverse)
+#' Load `tidyverse` packages: 
+suppressWarnings(
+  suppressMessages((library(tidyverse))))
 
 
 #' This is a quick and dirty exploration so I can build an
@@ -37,7 +39,7 @@ lotr <- lotr %>%
   droplevels()
   
 #' ### Modifying `Race` for Wizards and Men: 
-#' * the wizards' Race is Istari (singular: Istar), a subset
+#' * The wizards' Race is Istari (singular: Istar), a subset
 #' of the Ainur
 #' * Men should be Man, for consistency
 lotr <- lotr %>% 
