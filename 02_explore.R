@@ -38,20 +38,12 @@ lotr <- lotr %>%
   
 
 ## The wizards' Race is Istari, a subset of the Ainur 
-## Men should be Man, for consistency
-
 lotr <- lotr %>% 
   mutate(Race = case_when(Character %in% c("Gandalf", 
                                            "Saruman") ~ "Istar", 
                           TRUE ~ as.character(Race)) %>% as.factor()) %>% 
-
-
-    
-  # mutate(Race = as.character(Race)) %>% 
-  # mutate(Race = ifelse(Character %in% c("Gandalf", 
-  #                                       "Saruman"), 
-  #                      "Istar", 
-  #                      Race) %>% as.factor()) %>% 
+  
+  ## Men should be Man, for consistency
   mutate(Race = fct_recode(Race, 
                            Man = "Men"))
 
@@ -62,12 +54,13 @@ p <- ggplot(lotr, aes(x = Race, weight = Words))
 p + geom_bar()
 
 ## who speaks alot?
-wordTotals <-
+words <-
   lotr %>% 
-  group_by(Race) %>% 
-  summarise(total_words = sum(Words)) %>% 
-  arrange(desc(total_words))
-  
+  count(Race, 
+        wt = Words, 
+        sort = TRUE, 
+        name = "total_words")
+
 # Race   total_words
 # <fct>        <int>
 # 1 Hobbit        8796
