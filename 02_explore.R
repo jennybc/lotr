@@ -37,7 +37,8 @@ lotr <- lotr %>%
   droplevels()
   
 
-## The wizards' Race is Istari, a subset of the Ainur 
+## The wizards' Race is Istari (singular: Istar), a subset
+## of the Ainur
 lotr <- lotr %>% 
   mutate(Race = case_when(Character %in% c("Gandalf", 
                                            "Saruman") ~ "Istar", 
@@ -47,11 +48,6 @@ lotr <- lotr %>%
   mutate(Race = fct_recode(Race, 
                            Man = "Men"))
 
-
-
-
-p <- ggplot(lotr, aes(x = Race, weight = Words))
-p + geom_bar()
 
 ## who speaks alot?
 words <-
@@ -65,17 +61,17 @@ words <-
 # <fct>        <int>
 # 1 Hobbit        8796
 # 2 Man           8712
-# 3 Istari        5918
+# 3 Istar         5918
 # 4 Elf           3737
 # 5 Dwarf         1265
 # 6 Orc            723
 # 7 Ainur           43
 
 ## reorder Race based on words spoken
-lotr %<>% 
-  mutate(Race = reorder(Race, 
-                        Words, 
-                        sum))
+lotr <- lotr %>% 
+  mutate(Race = fct_reorder(Race,
+                            Words, 
+                            sum))
 
 levels(lotr$Race)
 
