@@ -1,26 +1,26 @@
 
+#' ---
+#' title: "Exploring the `lotr` data"
+#' author: "Jenny Bryan"
+#' date: "May 19th, 2019"
+#' ---
+
 library(tidyverse)
 
 
-## quick and dirty exploration so I can build example for STAT 545A
-
-## those scripts had to be lean, so I did more fiddling here
+#' This is a quick and dirty exploration so I can build an
+#' example for STAT 545A. Those scripts had to be lean, so I
+#' did more fiddling here
 
 lotr <- read.delim("lotr_wordsSpoken.tsv")
 
 str(lotr)
-# 'data.frame':  731 obs. of  5 variables:
-# $ Film     : Factor w/ 3 levels "The Fellowship Of The Ring",..: 1 1 1 ..
-# $ Chapter  : Factor w/ 188 levels "01: Prologue",..: 1 1 1 1 4 8 8 8 8 ..
-# $ Character: Factor w/ 74 levels "Aragorn","Arwen",..: 3 11 21 26 3 3 1..
-# $ Race     : Factor w/ 10 levels "Ainur","Dead",..: 7 4 4 6 7 7 7 1 7 7..
-# $ Words    : int  4 5 460 20 214 70 128 197 10 12 ...
 
 head(lotr)
 
 
 
-## reorder Film factor based on story
+#' ### Reorder `Film` factor based on story order:  
 lotr <- lotr %>% 
   mutate(Film = fct_relevel(Film, 
                             c("The Fellowship Of The Ring", 
@@ -28,28 +28,28 @@ lotr <- lotr %>%
                               "The Return Of The King")))
 
 
-## getting rid of some observations
-## I've always found the Ent parts really boring
-## Nazgul and the Dead just don't talk enough
-## Gollum is not a Race!
+#' ### Getting rid of some observations: 
+#' * I've always found the Ent parts really boring 
+#' * Nazgul and the Dead just don't talk enough 
+#' * Gollum is not a Race!
 lotr <- lotr %>% 
   filter(!(Race %in% c("Gollum", "Ent", "Dead", "Nazgul"))) %>% 
   droplevels()
   
-
-## The wizards' Race is Istari (singular: Istar), a subset
-## of the Ainur
+#' ### Modifying `Race` for Wizards and Men: 
+#' * the wizards' Race is Istari (singular: Istar), a subset
+#' of the Ainur
+#' * Men should be Man, for consistency
 lotr <- lotr %>% 
   mutate(Race = case_when(Character %in% c("Gandalf", 
                                            "Saruman") ~ "Istar", 
                           TRUE ~ as.character(Race)) %>% as.factor()) %>% 
   
-  ## Men should be Man, for consistency
   mutate(Race = fct_recode(Race, 
                            Man = "Men"))
 
 
-## who speaks alot?
+#' ### Who speaks a lot?
 words <-
   lotr %>% 
   count(Race, 
@@ -57,17 +57,8 @@ words <-
         sort = TRUE, 
         name = "total_words")
 
-# Race   total_words
-# <fct>        <int>
-# 1 Hobbit        8796
-# 2 Man           8712
-# 3 Istar         5918
-# 4 Elf           3737
-# 5 Dwarf         1265
-# 6 Orc            723
-# 7 Ainur           43
 
-## reorder Race based on words spoken
+#' ### Reorder `Race` based on words spoken
 lotr <- lotr %>% 
   mutate(Race = fct_reorder(Race,
                             Words, 
@@ -75,6 +66,8 @@ lotr <- lotr %>%
 
 levels(lotr$Race)
 
+
+#' ### Exploring with visualizations: 
 p1 <- lotr %>% 
   ggplot(aes(x = Race, 
              weight = Words)) +
@@ -85,6 +78,7 @@ p1 <- lotr %>%
   theme(panel.grid.minor = element_line(colour = "grey95"), 
       panel.grid.major = element_line(colour = "grey95")); p1
     
+
 
 p2 <- lotr %>% 
   ggplot(aes(x = Race,
@@ -112,7 +106,6 @@ p2 <- lotr %>%
   
 
 
-
 p3 <- lotr %>% 
   filter(Character %in% c("Frodo", 
                           "Sam")) %>% 
@@ -133,7 +126,6 @@ p3 <- lotr %>%
   theme_light() +
   theme(panel.grid.minor = element_line(colour = "grey95"), 
         panel.grid.major = element_line(colour = "grey95")); p3
-
 
 
   
