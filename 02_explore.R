@@ -39,12 +39,19 @@ lotr <- lotr %>%
 
 ## The wizards' Race is Istari, a subset of the Ainur 
 ## Men should be Man, for consistency
-lotrDat %<>% 
-  mutate(Race = as.character(Race)) %>% 
-  mutate(Race = ifelse(Character %in% c("Gandalf", 
-                                        "Saruman"), 
-                       "Istar", 
-                       Race) %>% as.factor()) %>% 
+
+lotr <- lotr %>% 
+  mutate(Race = case_when(Character %in% c("Gandalf", 
+                                           "Saruman") ~ "Istar", 
+                          TRUE ~ as.character(Race)) %>% as.factor()) %>% 
+
+
+    
+  # mutate(Race = as.character(Race)) %>% 
+  # mutate(Race = ifelse(Character %in% c("Gandalf", 
+  #                                       "Saruman"), 
+  #                      "Istar", 
+  #                      Race) %>% as.factor()) %>% 
   mutate(Race = fct_recode(Race, 
                            Man = "Men"))
 
