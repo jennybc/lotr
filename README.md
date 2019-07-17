@@ -1,9 +1,10 @@
-Original data file, sporting DOS/Windows line-ending characters and inconsistent quoting behavior that breaks github's display of delimited files, can be found here:
+Original data file, sporting DOS/Windows line-ending characters and inconsistent quoting behavior that breaks github's display of delimited files, was originally found here:
 
 <http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/words-spoken-by-character-race-scene/versions/1.txt>
 
+However, Many Eyes and the website above no longer exist.
 
-That was very lightly processed to yield the more machine-readable file:
+The file downloaded above was very lightly processed to yield the more machine-readable file:
 
 lotr_wordsSpoken.tsv
 
