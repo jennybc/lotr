@@ -2,7 +2,7 @@ Original data file, sporting DOS/Windows line-ending characters and inconsistent
 
 <http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/words-spoken-by-character-race-scene/versions/1.txt>
 
-However, Many Eyes and the website above no longer exist.
+However, Many Eyes and the website above no longer exist (<https://www.computerworld.com/article/2930326/ibm-to-shutter-dataviz-pioneer-many-eyes.html>).
 
 The file downloaded above was very lightly processed to yield the more machine-readable file:
 
